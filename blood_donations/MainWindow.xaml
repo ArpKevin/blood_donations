@@ -1,0 +1,87 @@
+﻿<Window x:Class="blood_donations.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        mc:Ignorable="d"
+        Title="Blood Donation Management System" Height="450" Width="800">
+    <StackPanel>
+        <!-- Header Section -->
+        <TextBlock Text="Blood Donation Management System" FontSize="20" FontWeight="Bold" Margin="10" HorizontalAlignment="Center"/>
+
+        <!-- Main Grid -->
+        <Grid Margin="10">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="1*"/>
+                <ColumnDefinition Width="1*"/>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="1*"/>
+                <RowDefinition Height="1*"/>
+                <RowDefinition Height="1*"/>
+                <RowDefinition Height="1*"/>
+            </Grid.RowDefinitions>
+
+            <!-- Donor Details -->
+            <Label Content="Donor Name:" Grid.Column="0" Grid.Row="0"/>
+            <TextBox x:Name="donorNameTextbox" Grid.Column="1" Grid.Row="0" Margin="5"/>
+
+            <Label Content="Donor Age:" Grid.Column="0" Grid.Row="1"/>
+            <TextBox x:Name="donorAgeTextbox" Grid.Column="1" Grid.Row="1" Margin="5"/>
+
+            <Label Content="Blood Type:" Grid.Column="0" Grid.Row="2"/>
+            <ComboBox x:Name="bloodTypeComboBox" Grid.Column="1" Grid.Row="2" Margin="5">
+                <ComboBoxItem Content="A+" />
+                <ComboBoxItem Content="A-" />
+                <ComboBoxItem Content="B+" />
+                <ComboBoxItem Content="B-" />
+                <ComboBoxItem Content="O+" />
+                <ComboBoxItem Content="O-" />
+                <ComboBoxItem Content="AB+" />
+                <ComboBoxItem Content="AB-" />
+            </ComboBox>
+
+            <Label Content="Last Donation Date:" Grid.Column="0" Grid.Row="3"/>
+            <DatePicker x:Name="lastDonationDatePicker" Grid.Column="1" Grid.Row="3" Margin="5"/>
+        </Grid>
+
+        <!-- Functionality Selection -->
+        <Grid Margin="10">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="2*"/>
+                <ColumnDefinition Width="1*"/>
+            </Grid.ColumnDefinitions>
+
+            <GroupBox Header="Donor Options" Grid.Column="0" Margin="15,0,0,0">
+                <StackPanel>
+                    <RadioButton x:Name="newDonorRadioButton" Content="Register New Donor" />
+                    <RadioButton x:Name="updateDonorRadioButton" Content="Update Donor Details" />
+                    <RadioButton x:Name="checkEligibilityRadioButton" Content="Check Eligibility" />
+                </StackPanel>
+            </GroupBox>
+
+            <GroupBox Header="Blood Inventory" Grid.Column="1" Margin="15,0,0,0">
+                <StackPanel>
+                    <Label Content="Blood Type Stock:"/>
+                    <ComboBox x:Name="stockBloodTypeComboBox" Margin="5">
+                        <ComboBoxItem Content="A+" />
+                        <ComboBoxItem Content="A-" />
+                        <ComboBoxItem Content="B+" />
+                        <ComboBoxItem Content="B-" />
+                        <ComboBoxItem Content="O+" />
+                        <ComboBoxItem Content="O-" />
+                        <ComboBoxItem Content="AB+" />
+                        <ComboBoxItem Content="AB-" />
+                    </ComboBox>
+                    <Label Content="Current Stock: 10 units" x:Name="stockLabel" FontWeight="Bold"/>
+                </StackPanel>
+            </GroupBox>
+        </Grid>
+
+        <!-- Action Buttons -->
+        <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="10">
+            <Button x:Name="saveButton" Content="Save" Width="100" Margin="5" />
+            <Button x:Name="resetButton" Content="Reset" Width="100" Margin="5" />
+        </StackPanel>
+    </StackPanel>
+</Window>
