@@ -28,5 +28,13 @@ namespace blood_donations
             bloodTypeComboBox.SelectedItem = null;
             lastDonationDatePicker.SelectedDate = null;
         }
+
+        private void ComboBoxStock_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            bool isStockStationSelected = stockStatinComboBox.SelectedItem != null;
+            bool isBloodTypeSelected = stockBloodTypeComboBox.SelectedItem != null;
+
+            requestStockButton.IsEnabled = isStockStationSelected && isBloodTypeSelected;
+        }
     }
 }

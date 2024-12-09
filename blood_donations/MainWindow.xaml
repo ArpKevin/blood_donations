@@ -72,15 +72,25 @@
 
                         </ComboBox>
                     </StackPanel>
+                    <RadioButton x:Name="checkMostRecentDonationRadioButton" Content="Check Most Recent Donation" />
+                    <StackPanel Visibility="Collapsed">
+                        <Label Content="Select the donor, and we will tell you when they have been registered."></Label>
+                        <ComboBox HorizontalAlignment="Center">
+
+                        </ComboBox>
+                    </StackPanel>
                 </StackPanel>
             </GroupBox>
 
             <GroupBox Header="Blood Inventory" Grid.Column="1" Margin="15,0,0,0">
                 <StackPanel>
                     <Label Content="Station:"/>
-                    <ComboBox x:Name="stockStatinComboBox" Margin="5"></ComboBox>
+                    <ComboBox x:Name="stockStatinComboBox" Margin="5" SelectionChanged="ComboBoxStock_SelectionChanged">
+                        <ComboBoxItem Content="A+" />
+                        <ComboBoxItem Content="A-" />
+                    </ComboBox>
                     <Label Content="Blood Type Stock:"/>
-                    <ComboBox x:Name="stockBloodTypeComboBox" Margin="5">
+                    <ComboBox x:Name="stockBloodTypeComboBox" Margin="5" SelectionChanged="ComboBoxStock_SelectionChanged">
                         <ComboBoxItem Content="A+" />
                         <ComboBoxItem Content="A-" />
                         <ComboBoxItem Content="B+" />
@@ -90,6 +100,7 @@
                         <ComboBoxItem Content="AB+" />
                         <ComboBoxItem Content="AB-" />
                     </ComboBox>
+                    <Button x:Name="requestStockButton" Content="Request Stock" IsEnabled="False"/>
                     <Label Content="Current Stock:" x:Name="stockLabel" FontWeight="Bold"/>
                 </StackPanel>
             </GroupBox>
