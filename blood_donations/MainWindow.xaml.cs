@@ -20,5 +20,13 @@ namespace blood_donations
         {
             InitializeComponent();
         }
+
+        private void resetButton_Click(object sender, RoutedEventArgs e)
+        {
+            donorNameTextbox.Text = string.Empty;
+            donorAgeTextbox.Text = string.Empty;
+            bloodTypeComboBox.SelectedItem = null;
+            lastDonationDatePicker.SelectedDate = null;
+        }
     }
 }
