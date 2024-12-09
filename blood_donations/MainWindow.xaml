@@ -4,7 +4,7 @@
             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
             mc:Ignorable="d"
-            Title="Blood Donation Management System" Height="450" Width="800">
+            Title="Blood Donation Management System" Height="520" Width="800">
     <StackPanel>
         <!-- Header Section -->
         <TextBlock Text="Blood Donation Management System" FontSize="20" FontWeight="Bold" Margin="10" HorizontalAlignment="Center"/>
@@ -20,7 +20,6 @@
                 <RowDefinition Height="1*"/>
                 <RowDefinition Height="1*"/>
                 <RowDefinition Height="1*"/>
-                <RowDefinition Height="1*"/>
             </Grid.RowDefinitions>
 
             <!-- Donor Details -->
@@ -30,23 +29,12 @@
             <Label Content="Donor Age:" Grid.Column="0" Grid.Row="1"/>
             <TextBox x:Name="donorAgeTextbox" Grid.Column="1" Grid.Row="1" Margin="5" />
 
-            <Label Content="Phone number:" Grid.Column="0" Grid.Row="2"/>
-            <TextBox x:Name="donorPhoneNumberTextbox" Grid.Column="1" Grid.Row="2" Margin="5" />
-
-            <Label Content="Blood Type:" Grid.Column="0" Grid.Row="3"/>
-            <ComboBox x:Name="bloodTypeComboBox" Grid.Column="1" Grid.Row="3" Margin="5" >
-                <ComboBoxItem Content="A+" />
-                <ComboBoxItem Content="A-" />
-                <ComboBoxItem Content="B+" />
-                <ComboBoxItem Content="B-" />
-                <ComboBoxItem Content="O+" />
-                <ComboBoxItem Content="O-" />
-                <ComboBoxItem Content="AB+" />
-                <ComboBoxItem Content="AB-" />
+            <Label Content="Blood Type:" Grid.Column="0" Grid.Row="2"/>
+            <ComboBox x:Name="bloodTypeComboBox" Grid.Column="1" Grid.Row="2" Margin="5" >
             </ComboBox>
 
-            <Label Content="Last Donation Date:" Grid.Column="0" Grid.Row="4"/>
-            <DatePicker x:Name="lastDonationDatePicker" Grid.Column="1" Grid.Row="4" Margin="5" />
+            <Label Content="Last Donation Date:" Grid.Column="0" Grid.Row="3"/>
+            <DatePicker x:Name="lastDonationDatePicker" Grid.Column="1" Grid.Row="3" Margin="5" />
         </Grid>
 
         <!-- Functionality Selection -->
@@ -58,47 +46,39 @@
 
             <GroupBox Header="Donor Options" Grid.Column="0" Margin="15,0,0,0">
                 <StackPanel>
-                    <RadioButton x:Name="checkEligibilityRadioButton" Content="Check Eligibility" />
-                    <StackPanel Visibility="Collapsed">
-                        <Label Content="Select the donor, and we will tell you if they're eligible to donate blood."></Label>
-                        <ComboBox HorizontalAlignment="Center">
-                            
+                    <!-- Panel for Eligibility -->
+                    <StackPanel x:Name="eligibilityPanel" Visibility="Visible">
+                        <Label Content="Select the donor, and we will tell you if they're eligible to donate blood."/>
+                        <ComboBox x:Name="eligibilityComboBox" HorizontalAlignment="Center" SelectionChanged="EligibilityComboBox_SelectionChanged">
+                            <!-- Dummy Data for ComboBox -->
+                            <ComboBoxItem Content="John Doe"/>
+                            <ComboBoxItem Content="Jane Smith"/>
+                            <ComboBoxItem Content="Alice Brown"/>
+                            <ComboBoxItem Content="Bob White"/>
                         </ComboBox>
-                    </StackPanel>
-                    <RadioButton x:Name="checkRegistrationDateRadioButton" Content="Check Registration Date" />
-                    <StackPanel Visibility="Collapsed">
-                        <Label Content="Select the donor, and we will tell you when they have been registered."></Label>
-                        <ComboBox HorizontalAlignment="Center">
 
-                        </ComboBox>
+                        <!-- Eligibility Info Display -->
+                        <StackPanel x:Name="eligibilityInfoPanel" Margin="10,10,10,0">
+                            <TextBlock x:Name="eligibilityNameTextBlock" FontWeight="Bold" />
+                            <TextBlock x:Name="registrationDateTextBlock" />
+                            <TextBlock x:Name="lastDonationDateTextBlock" />
+                            <TextBlock x:Name="disqualifyingFactorsTextBlock" FontWeight="Bold" />
+                        </StackPanel>
                     </StackPanel>
-                    <RadioButton x:Name="checkMostRecentDonationRadioButton" Content="Check Most Recent Donation" />
-                    <StackPanel Visibility="Collapsed">
-                        <Label Content="Select the donor, and we will tell you when they have been registered."></Label>
-                        <ComboBox HorizontalAlignment="Center">
 
-                        </ComboBox>
-                    </StackPanel>
                 </StackPanel>
+
             </GroupBox>
 
             <GroupBox Header="Blood Inventory" Grid.Column="1" Margin="15,0,0,0">
                 <StackPanel>
                     <Label Content="Station:"/>
                     <ComboBox x:Name="stockStatinComboBox" Margin="5" SelectionChanged="ComboBoxStock_SelectionChanged">
-                        <ComboBoxItem Content="A+" />
-                        <ComboBoxItem Content="A-" />
+
                     </ComboBox>
                     <Label Content="Blood Type Stock:"/>
                     <ComboBox x:Name="stockBloodTypeComboBox" Margin="5" SelectionChanged="ComboBoxStock_SelectionChanged">
-                        <ComboBoxItem Content="A+" />
-                        <ComboBoxItem Content="A-" />
-                        <ComboBoxItem Content="B+" />
-                        <ComboBoxItem Content="B-" />
-                        <ComboBoxItem Content="O+" />
-                        <ComboBoxItem Content="O-" />
-                        <ComboBoxItem Content="AB+" />
-                        <ComboBoxItem Content="AB-" />
+
                     </ComboBox>
                     <Button x:Name="requestStockButton" Content="Request Stock" IsEnabled="False"/>
                     <Label Content="Current Stock:" x:Name="stockLabel" FontWeight="Bold"/>
