@@ -12,7 +12,6 @@ namespace blood_donations
         public string ID_card { get; set; }
         public string Name { get; set; }
         public int Age { get; set; }
-        public string Address { get; set; }
         public int BloodTypeID { get; set; }
         public string Phone_no { get; set; }
         public string Gender { get; set; }
