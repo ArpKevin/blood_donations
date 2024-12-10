@@ -1,17 +1,26 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace blood_donations
+﻿namespace blood_donations
 {
     public class Donation
     {
-        public int DonationID { get; set; }  // Primary Key
-        public int DonorID { get; set; }     // Foreign Key to Donor Table
-        public int StationID { get; set; }   // Foreign Key to BloodStation Table
+        public int DonationID { get; set; }
+        public int DonorID { get; set; }
+        public int StationID { get; set; }
         public DateTime DonationDate { get; set; }
-        public int AmountDonated { get; set; }  // Amount donated in milliliters (or any unit you use)
+        public int AmountDonated { get; set; }
+
+        public Donation(string sor)
+        {
+            var values = sor.Split(';').Select(x => x.Replace("\"", "")).ToList();
+            DonationID = Convert.ToInt32(values[0]);
+            DonorID = Convert.ToInt32(values[1]);
+            StationID = Convert.ToInt32(values[2]);
+            DonationDate = DateTime.Parse(values[3]);
+            AmountDonated = Convert.ToInt32(values[4]);
+        }
+
+        public override string ToString()
+        {
+            return $"Donation ID: {DonationID}, Donor ID: {DonorID}, Station ID: {StationID}, Date: {DonationDate}, Amount: {AmountDonated}ml";
+        }
     }
 }

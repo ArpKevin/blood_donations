@@ -50,11 +50,6 @@
                     <StackPanel x:Name="eligibilityPanel" Visibility="Visible">
                         <Label Content="Select the donor, and we will tell you if they're eligible to donate blood."/>
                         <ComboBox x:Name="eligibilityComboBox" HorizontalAlignment="Center" SelectionChanged="EligibilityComboBox_SelectionChanged">
-                            <!-- Dummy Data for ComboBox -->
-                            <ComboBoxItem Content="John Doe"/>
-                            <ComboBoxItem Content="Jane Smith"/>
-                            <ComboBoxItem Content="Alice Brown"/>
-                            <ComboBoxItem Content="Bob White"/>
                         </ComboBox>
 
                         <!-- Eligibility Info Display -->
@@ -73,7 +68,7 @@
             <GroupBox Header="Blood Inventory" Grid.Column="1" Margin="15,0,0,0">
                 <StackPanel>
                     <Label Content="Station:"/>
-                    <ComboBox x:Name="stockStatinComboBox" Margin="5" SelectionChanged="ComboBoxStock_SelectionChanged">
+                    <ComboBox x:Name="stockStationComboBox" Margin="5" SelectionChanged="ComboBoxStock_SelectionChanged">
 
                     </ComboBox>
                     <Label Content="Blood Type Stock:"/>
