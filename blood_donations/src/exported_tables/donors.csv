@@ -1,9 +1,9 @@
 "DonorID";"ID_card";"Name";"Age";"BloodTypeID";"Gender";"Registration_date";"Is_eligible";"Disqualifying_factors"
 "1";"ID123";"John Doe";"30";"1";"1";"2022-05-10";"1";NULL
-"2";"ID124";"Jane Smith";"25";"2";"0";"2021-11-15";"1";"Diabetes"
+"2";"ID124";"Jane Smith";"25";"2";"0";"2021-11-15";"0";"Diabetes"
 "3";"ID125";"Alice Johnson";"35";"3";"1";"2020-08-01";"1";NULL
-"4";"ID126";"Bob Brown";"40";"4";"0";"2023-03-10";"1";"Pregnancy"
+"4";"ID126";"Eva Clark";"40";"4";"0";"2023-03-10";"0";"Pregnancy"
 "5";"ID127";"Charlie Davis";"50";"5";"1";"2019-07-20";"0";"High Blood Pressure"
 "6";"ID128";"David Wilson";"60";"6";"1";"2020-12-25";"1";NULL
-"7";"ID129";"Eva Clark";"28";"7";"0";"2022-06-05";"1";NULL
-"8";"ID130";"Frank Moore";"45";"8";"1";"2021-04-10";"1";"Chronic Illness"
+"7";"ID129";"Bob Brown";"28";"7";"0";"2022-06-05";"1";NULL
+"8";"ID130";"Frank Moore";"45";"8";"1";"2021-04-10";"0";"Chronic Illness"

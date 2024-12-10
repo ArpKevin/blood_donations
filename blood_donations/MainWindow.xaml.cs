@@ -18,11 +18,14 @@ namespace blood_donations
     public partial class MainWindow : Window
     {
         public string csvFolderPath = @"..\..\..\src\exported_tables\";
+        private List<Donor> donors;
+        private List<Donation> donations;
         public MainWindow()
         {
             InitializeComponent();
 
-            
+            donations = new List<Donation>();
+
             List<BloodType> bloodTypes = new();
             foreach (var item in File.ReadLines(csvFolderPath + "blood_types.csv").Skip(1))
             {
@@ -47,7 +50,7 @@ namespace blood_donations
             stockStationComboBox.DisplayMemberPath = "StationName";
             stockStationComboBox.SelectedValuePath = "StationID";
 
-            List<Donor> donors = new();
+            donors = new List<Donor>();
             foreach (var item in File.ReadLines(csvFolderPath + "donors.csv").Skip(1))
             {
                 donors.Add(new(item));
@@ -56,7 +59,6 @@ namespace blood_donations
             eligibilityComboBox.ItemsSource = donors;
             eligibilityComboBox.DisplayMemberPath = "Name";
             eligibilityComboBox.SelectedValuePath = "DonorID";
-
         }
 
         private void ComboBoxStock_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -69,6 +71,31 @@ namespace blood_donations
 
         private void EligibilityComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
+            var selectedDonor = donors.FirstOrDefault(d => d.DonorID == (int)eligibilityComboBox.SelectedValue);
+
+            var lastDonationDate = donations
+                .Where(d => d.DonorID == selectedDonor.DonorID)
+                .OrderByDescending(d => d.DonationDate)
+                .FirstOrDefault()?.DonationDate;
+
+            var eligibilityMessage = string.Empty;
+            if (!selectedDonor.IsEligible)
+            {
+                eligibilityMessage = $"Not eligible - {selectedDonor.DisqualifyingFactors}";
+            }
+            else if (lastDonationDate != null && lastDonationDate.Value.AddMonths(3) > DateTime.Now)
+            {
+                eligibilityMessage = "Not eligible: Must wait 3 months from last donation.";
+            }
+            else
+            {
+                eligibilityMessage = "Eligible for donation.";
+            }
+
+            eligibilityInfoPanel.Text = $"{selectedDonor.Name} ({selectedDonor.ID_card})\n" +
+                                        $"Registration Date: {selectedDonor.RegistrationDate.ToShortDateString()}\n" +
+                                        $"Last donation Date: {(lastDonationDate == null ? "Donor has never donated." : lastDonationDate.Value.ToShortDateString())}\n" +
+                                        $"Eligibility: {eligibilityMessage}";
 
         }
         private void resetButton_Click(object sender, RoutedEventArgs e)

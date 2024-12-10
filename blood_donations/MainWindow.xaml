@@ -53,12 +53,8 @@
                         </ComboBox>
 
                         <!-- Eligibility Info Display -->
-                        <StackPanel x:Name="eligibilityInfoPanel" Margin="10,10,10,0">
-                            <TextBlock x:Name="eligibilityNameTextBlock" FontWeight="Bold" />
-                            <TextBlock x:Name="registrationDateTextBlock" />
-                            <TextBlock x:Name="lastDonationDateTextBlock" />
-                            <TextBlock x:Name="disqualifyingFactorsTextBlock" FontWeight="Bold" />
-                        </StackPanel>
+                        <TextBlock Name="eligibilityInfoPanel" Margin="10,10,10,0">
+                        </TextBlock>
                     </StackPanel>
 
                 </StackPanel>
