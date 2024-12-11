@@ -5,7 +5,7 @@
         public int DonationID { get; set; }
         public int DonorID { get; set; }
         public int StationID { get; set; }
-        public DateTime DonationDate { get; set; }
+        public DateTime? DonationDate { get; set; }
         public int AmountDonated { get; set; }
 
         public Donation(string sor)
@@ -14,7 +14,7 @@
             DonationID = Convert.ToInt32(values[0]);
             DonorID = Convert.ToInt32(values[1]);
             StationID = Convert.ToInt32(values[2]);
-            DonationDate = DateTime.Parse(values[3]);
+            DonationDate = string.IsNullOrWhiteSpace(values[3]) ? (DateTime?)null : DateTime.Parse(values[3]);
             AmountDonated = Convert.ToInt32(values[4]);
         }
 

@@ -20,13 +20,30 @@ namespace blood_donations
         public string csvFolderPath = @"..\..\..\src\exported_tables\";
         private List<Donor> donors;
         private List<Donation> donations;
+        private List<BloodType> bloodTypes;
+        List<BloodStation> bloodStations;
         public MainWindow()
         {
             InitializeComponent();
+            donors = new();
+            donations = new();
+            bloodTypes = new();
+            bloodStations = new();
 
-            donations = new List<Donation>();
+            foreach (var item in File.ReadLines(csvFolderPath + "donors.csv").Skip(1))
+            {
+                donors.Add(new(item));
+            }
 
-            List<BloodType> bloodTypes = new();
+            eligibilityComboBox.ItemsSource = donors;
+            eligibilityComboBox.DisplayMemberPath = "Name";
+            eligibilityComboBox.SelectedValuePath = "DonorID";
+
+            foreach (var item in File.ReadLines(csvFolderPath + "donations.csv").Skip(1))
+            {
+                donations.Add(new(item));
+            }
+
             foreach (var item in File.ReadLines(csvFolderPath + "blood_types.csv").Skip(1))
             {
                 bloodTypes.Add(new(item));
@@ -40,7 +57,7 @@ namespace blood_donations
             stockBloodTypeComboBox.DisplayMemberPath = "BloodTypeName";
             stockBloodTypeComboBox.SelectedValuePath = "BloodTypeID";
 
-            List<BloodStation> bloodStations = new();
+
             foreach (var item in File.ReadLines(csvFolderPath + "blood_stations.csv").Skip(1))
             {
                 bloodStations.Add(new(item));
@@ -49,16 +66,6 @@ namespace blood_donations
             stockStationComboBox.ItemsSource = bloodStations;
             stockStationComboBox.DisplayMemberPath = "StationName";
             stockStationComboBox.SelectedValuePath = "StationID";
-
-            donors = new List<Donor>();
-            foreach (var item in File.ReadLines(csvFolderPath + "donors.csv").Skip(1))
-            {
-                donors.Add(new(item));
-            }
-
-            eligibilityComboBox.ItemsSource = donors;
-            eligibilityComboBox.DisplayMemberPath = "Name";
-            eligibilityComboBox.SelectedValuePath = "DonorID";
         }
 
         private void ComboBoxStock_SelectionChanged(object sender, SelectionChangedEventArgs e)
