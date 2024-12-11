@@ -61,7 +61,7 @@
 
             </GroupBox>
 
-            <GroupBox Header="Blood Inventory" Grid.Column="1" Margin="15,0,0,0">
+            <GroupBox Header="Blood Inventory" Grid.Column="1" Margin="15,0,0,0" Width="Auto">
                 <StackPanel>
                     <Label Content="Station:"/>
                     <ComboBox x:Name="stockStationComboBox" Margin="5" SelectionChanged="ComboBoxStock_SelectionChanged">
@@ -71,8 +71,8 @@
                     <ComboBox x:Name="stockBloodTypeComboBox" Margin="5" SelectionChanged="ComboBoxStock_SelectionChanged">
 
                     </ComboBox>
-                    <Button x:Name="requestStockButton" Content="Request Stock" IsEnabled="False"/>
-                    <Label Content="Current Stock:" x:Name="stockLabel" FontWeight="Bold"/>
+                    <Button x:Name="requestStockButton" Content="Request Stock" IsEnabled="False" Click="requestStockButton_Click"/>
+                    <TextBlock Text="Click the button to display the current stocks" x:Name="stockLabel" FontWeight="Bold" Visibility="Hidden" TextWrapping="Wrap"></TextBlock>
                 </StackPanel>
             </GroupBox>
         </Grid>

@@ -73,7 +73,10 @@ namespace blood_donations
             bool isStockStationSelected = stockStationComboBox.SelectedItem != null;
             bool isBloodTypeSelected = stockBloodTypeComboBox.SelectedItem != null;
 
-            requestStockButton.IsEnabled = isStockStationSelected && isBloodTypeSelected;
+            bool bothStockComboboxesSelected = isStockStationSelected && isBloodTypeSelected;
+
+            requestStockButton.IsEnabled = bothStockComboboxesSelected;
+            stockLabel.Visibility = bothStockComboboxesSelected ? Visibility.Visible : Visibility.Collapsed;
         }
 
         private void EligibilityComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -119,6 +122,19 @@ namespace blood_donations
             donorAgeTextbox.Text = string.Empty;
             bloodTypeComboBox.SelectedIndex = -1;
             lastDonationDatePicker.SelectedDate = null;
+        }
+
+        private void requestStockButton_Click(object sender, RoutedEventArgs e)
+        {
+            var selectedBloodType = (BloodType)stockBloodTypeComboBox.SelectedItem;
+            var selectedStation = (BloodStation)stockStationComboBox.SelectedItem;
+
+            var totalStock = donations
+                .Where(d => d.StationID == selectedStation.StationID &&
+                            donors.FirstOrDefault(don => don.DonorID == d.DonorID)?.BloodTypeID == selectedBloodType.BloodTypeID)
+                .Sum(d => d.AmountDonated);
+
+            stockLabel.Text = $"The current stock of Type {selectedBloodType.BloodTypeName} blood at the following station: {selectedStation.StationName} - is {(double)totalStock / 1000} liters.";
         }
     }
 }
