@@ -6,38 +6,8 @@
             mc:Ignorable="d"
             Title="Blood Donation Management System" Height="520" Width="Auto">
     <StackPanel>
-        <!-- Header Section -->
         <TextBlock Text="Blood Donation Management System" FontSize="20" FontWeight="Bold" Margin="10" HorizontalAlignment="Center"/>
 
-        <!-- Main Grid -->
-        <Grid Margin="10">
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="1*"/>
-                <ColumnDefinition Width="1*"/>
-            </Grid.ColumnDefinitions>
-            <Grid.RowDefinitions>
-                <RowDefinition Height="1*"/>
-                <RowDefinition Height="1*"/>
-                <RowDefinition Height="1*"/>
-                <RowDefinition Height="1*"/>
-            </Grid.RowDefinitions>
-
-            <!-- Donor Details -->
-            <Label Content="Donor Name:" Grid.Column="0" Grid.Row="0"/>
-            <TextBox x:Name="donorNameTextbox" Grid.Column="1" Grid.Row="0" Margin="5" />
-
-            <Label Content="Donor Age:" Grid.Column="0" Grid.Row="1"/>
-            <TextBox x:Name="donorAgeTextbox" Grid.Column="1" Grid.Row="1" Margin="5" />
-
-            <Label Content="Blood Type:" Grid.Column="0" Grid.Row="2"/>
-            <ComboBox x:Name="bloodTypeComboBox" Grid.Column="1" Grid.Row="2" Margin="5" >
-            </ComboBox>
-
-            <Label Content="Last Donation Date:" Grid.Column="0" Grid.Row="3"/>
-            <DatePicker x:Name="lastDonationDatePicker" Grid.Column="1" Grid.Row="3" Margin="5" />
-        </Grid>
-
-        <!-- Functionality Selection -->
         <Grid Margin="10">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="2*"/>
@@ -46,13 +16,11 @@
 
             <GroupBox Header="Donor Options" Grid.Column="0" Margin="15,0,0,0">
                 <StackPanel>
-                    <!-- Panel for Eligibility -->
                     <StackPanel x:Name="eligibilityPanel" Visibility="Visible">
                         <Label Content="Select the donor, and we will tell you if they're eligible to donate blood."/>
                         <ComboBox x:Name="eligibilityComboBox" HorizontalAlignment="Center" SelectionChanged="EligibilityComboBox_SelectionChanged">
                         </ComboBox>
 
-                        <!-- Eligibility Info Display -->
                         <TextBlock Name="eligibilityInfoPanel" Margin="10,10,10,0">
                         </TextBlock>
                     </StackPanel>
@@ -77,10 +45,6 @@
             </GroupBox>
         </Grid>
 
-        <!-- Action Buttons -->
-        <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="10">
-            <Button x:Name="saveButton" Content="Register new donor" Width="150" Margin="5" />
-            <Button x:Name="resetButton" Content="Reset" Width="100" Margin="5" Click="resetButton_Click" />
-        </StackPanel>
+        <Button x:Name="resetButton" Content="Reset" Width="100" Margin="5" Click="resetButton_Click" />
     </StackPanel>
 </Window>

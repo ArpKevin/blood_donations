@@ -49,10 +49,6 @@ namespace blood_donations
                 bloodTypes.Add(new(item));
             }
 
-            bloodTypeComboBox.ItemsSource = bloodTypes;
-            bloodTypeComboBox.DisplayMemberPath = "BloodTypeName";
-            bloodTypeComboBox.SelectedValuePath = "BloodTypeID";
-
             stockBloodTypeComboBox.ItemsSource = bloodTypes;
             stockBloodTypeComboBox.DisplayMemberPath = "BloodTypeName";
             stockBloodTypeComboBox.SelectedValuePath = "BloodTypeID";
@@ -118,10 +114,10 @@ namespace blood_donations
         }
         private void resetButton_Click(object sender, RoutedEventArgs e)
         {
-            donorNameTextbox.Text = string.Empty;
-            donorAgeTextbox.Text = string.Empty;
-            bloodTypeComboBox.SelectedIndex = -1;
-            lastDonationDatePicker.SelectedDate = null;
+            eligibilityComboBox.SelectedItem = null;
+            stockStationComboBox.SelectedItem = null;
+            stockBloodTypeComboBox.SelectedItem = null;
+
         }
 
         private void requestStockButton_Click(object sender, RoutedEventArgs e)
