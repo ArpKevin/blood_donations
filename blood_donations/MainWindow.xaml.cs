@@ -17,62 +17,91 @@ namespace blood_donations
     /// </summary>
     public partial class MainWindow : Window
     {
-        public string csvFolderPath = @"..\..\..\src\exported_tables\";
-        private List<Donor> donors;
-        private List<Donation> donations;
-        private List<BloodType> bloodTypes;
-        List<BloodStation> bloodStations;
+        private const string csvFolderPath = @"..\..\..\src\exported_tables\";
+        private readonly List<Donor> donors = new();
+        private readonly List<Donation> donations = new();
+        private readonly List<BloodType> bloodTypes = new();
+        private readonly List<BloodStation> bloodStations = new();
         public MainWindow()
         {
             InitializeComponent();
-            donors = new();
-            donations = new();
-            bloodTypes = new();
-            bloodStations = new();
+            LoadData();
+            ConfigureComboBoxes();
 
-            foreach (var item in File.ReadLines(csvFolderPath + "donors.csv").Skip(1))
-            {
-                donors.Add(new(item));
-            }
+            //foreach (var item in File.ReadLines(csvFolderPath + "donors.csv").Skip(1))
+            //{
+            //    donors.Add(new(item));
+            //}
 
-            eligibilityComboBox.ItemsSource = donors;
-            eligibilityComboBox.DisplayMemberPath = "Name";
-            eligibilityComboBox.SelectedValuePath = "DonorID";
+            //eligibilityComboBox.ItemsSource = donors;
+            //eligibilityComboBox.DisplayMemberPath = "Name";
+            //eligibilityComboBox.SelectedValuePath = "DonorID";
 
-            foreach (var item in File.ReadLines(csvFolderPath + "donations.csv").Skip(1))
-            {
-                donations.Add(new(item));
-            }
+            //foreach (var item in File.ReadLines(csvFolderPath + "donations.csv").Skip(1))
+            //{
+            //    donations.Add(new(item));
+            //}
 
-            foreach (var item in File.ReadLines(csvFolderPath + "blood_types.csv").Skip(1))
-            {
-                bloodTypes.Add(new(item));
-            }
+            //foreach (var item in File.ReadLines(csvFolderPath + "blood_types.csv").Skip(1))
+            //{
+            //    bloodTypes.Add(new(item));
+            //}
 
-            stockBloodTypeComboBox.ItemsSource = bloodTypes;
-            stockBloodTypeComboBox.DisplayMemberPath = "BloodTypeName";
-            stockBloodTypeComboBox.SelectedValuePath = "BloodTypeID";
+            //stockBloodTypeComboBox.ItemsSource = bloodTypes;
+            //stockBloodTypeComboBox.DisplayMemberPath = "BloodTypeName";
+            //stockBloodTypeComboBox.SelectedValuePath = "BloodTypeID";
 
 
-            foreach (var item in File.ReadLines(csvFolderPath + "blood_stations.csv").Skip(1))
-            {
-                bloodStations.Add(new(item));
-            }
+            //foreach (var item in File.ReadLines(csvFolderPath + "blood_stations.csv").Skip(1))
+            //{
+            //    bloodStations.Add(new(item));
+            //}
 
-            stockStationComboBox.ItemsSource = bloodStations;
-            stockStationComboBox.DisplayMemberPath = "StationName";
-            stockStationComboBox.SelectedValuePath = "StationID";
+            //stockStationComboBox.ItemsSource = bloodStations;
+            //stockStationComboBox.DisplayMemberPath = "StationName";
+            //stockStationComboBox.SelectedValuePath = "StationID";
+        }
+
+        private void LoadData()
+        {
+            LoadEntities("donors.csv", donors, line => new Donor(line));
+            LoadEntities("donations.csv", donations, line => new Donation(line));
+            LoadEntities("blood_types.csv", bloodTypes, line => new BloodType(line));
+            LoadEntities("blood_stations.csv", bloodStations, line => new BloodStation(line));
+        }
+
+        private void LoadEntities<T>(string fileName, List<T> list, Func<string, T> parseFunction)
+        {
+            var filePath = System.IO.Path.Combine(csvFolderPath, fileName);
+            list.AddRange(File.ReadLines(filePath).Skip(1).Select(parseFunction));
+        }
+
+        private void ConfigureComboBoxes()
+        {
+            ConfigureComboBox(eligibilityComboBox, donors, "Name", "DonorID");
+            ConfigureComboBox(stockBloodTypeComboBox, bloodTypes, "BloodTypeName", "BloodTypeID");
+            ConfigureComboBox(stockStationComboBox, bloodStations, "StationName", "StationID");
+        }
+
+        private static void ConfigureComboBox<T>(ComboBox comboBox, List<T> itemsSource, string displayMemberPath, string selectedValuePath)
+        {
+            comboBox.ItemsSource = itemsSource;
+            comboBox.DisplayMemberPath = displayMemberPath;
+            comboBox.SelectedValuePath = selectedValuePath;
         }
 
         private void ComboBoxStock_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            bool isStockStationSelected = stockStationComboBox.SelectedItem != null;
-            bool isBloodTypeSelected = stockBloodTypeComboBox.SelectedItem != null;
+            //bool isStockStationSelected = stockStationComboBox.SelectedItem != null;
+            //bool isBloodTypeSelected = stockBloodTypeComboBox.SelectedItem != null;
 
-            bool bothStockComboboxesSelected = isStockStationSelected && isBloodTypeSelected;
+            //bool bothStockComboboxesSelected = isStockStationSelected && isBloodTypeSelected;
 
-            requestStockButton.IsEnabled = bothStockComboboxesSelected;
-            stockLabel.Visibility = bothStockComboboxesSelected ? Visibility.Visible : Visibility.Collapsed;
+            //requestStockButton.IsEnabled = bothStockComboboxesSelected;
+            //stockLabel.Visibility = bothStockComboboxesSelected ? Visibility.Visible : Visibility.Collapsed;
+
+            requestStockButton.IsEnabled = stockStationComboBox.SelectedItem != null && stockBloodTypeComboBox.SelectedItem != null;
+            stockLabel.Visibility = requestStockButton.IsEnabled ? Visibility.Visible : Visibility.Collapsed;
         }
 
         private void EligibilityComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
