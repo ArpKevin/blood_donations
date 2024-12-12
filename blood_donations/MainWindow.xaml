@@ -4,7 +4,7 @@
             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
             mc:Ignorable="d"
-            Title="Blood Donation Management System" Height="520" Width="Auto">
+            Title="Blood Donation Management System" Height="Auto" Width="Auto">
     <StackPanel>
         <TextBlock Text="Blood Donation Management System" FontSize="20" FontWeight="Bold" Margin="10" HorizontalAlignment="Center"/>
 
